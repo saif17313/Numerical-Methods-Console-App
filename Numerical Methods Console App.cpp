@@ -1,14 +1,15 @@
 #include<bits/stdc++.h>
 using namespace std;
+typedef long double ld;
 float* coeff;
-vector<double> coefficient;
+vector<ld> coefficient;
 int degree=0;
-int a=0,b=0,c=0,d=0,ft=0;
+ld a=0,b=0,c=0,d=0,ft=0;
 
-double function(double x)
+ld func(ld x)
 {
     if(ft==1){
-        double result = 0.0;
+        ld result = 0.0;
          for (int i = 0; i <= degree; i++) {
         result += coefficient[i] * pow(x, degree-i);
       }  
@@ -20,10 +21,10 @@ double function(double x)
     }
 }
 
-double derivative(double x)
+ld derivative(ld x)
 {
    if(ft==1){
-    double result=0.0;
+    ld result=0.0;
     for (int i = 0; i <= degree; i++) {
         result += (degree-i)*coefficient[i] * pow(x, degree-i-1);
       } 
@@ -96,7 +97,7 @@ void newton_raphsonAlgebric()
          cout<<fabs(x-x1)<<endl;
 
 
-    }while(fabs(x-x1)>=0.0001);
+    }while(fabs(x-x1)>=0.00001);
     for(float root : roots)
     {
         if(root==x1)
@@ -118,6 +119,100 @@ void newton_raphsonAlgebric()
 
 }
 
+void bisection()
+{
+    ld p=-1000,q=-999;
+    while(func(p)*func(q)>=0.0)
+    {
+       if(func(p)==0.0)
+       {
+           cout<<"\033[1;31mOne of the value is : \033[0m"<<p<<endl;
+           return;
+       }
+       else if(func(q)==0.0)
+       {
+         cout<<"\033[1;31mOne of the value is : \033[0m"<<q<<endl;
+           return;
+       }
+       p++;
+       q++;
+    }
+    ld x,x1=0,d1=1000;
+    int count=0;
+    while(d1>0.00001)
+    {
+       count++;
+       x=(p+q)/2;
+
+    if(func(x)==0.0)
+        break;
+
+    if(func(x)*func(p)<0.0)
+    {
+       q=x;
+    }
+    else
+    {
+      p=x;
+    }
+    d1=fabs(x-x1);
+    x1=x;
+    }
+    cout<<setprecision(10)<<fixed;
+    cout<<"\033[1;31mOne of the value is : \033[0m"<<x<<endl;
+    cout<<"\033[1mThe total needed iteration is : \033[0m"<<count<<endl;
+    coefficient.clear();
+    a=b=c=d=0;
+    return;
+}
+
+void false_position()
+
+{
+    ld p=-1000,q=-999;
+    while(func(p)*func(q)>=0.0)
+    {
+       if(func(p)==0.0)
+       {
+           cout<<"\033[1;31mOne of the value is : \033[0m"<<p<<endl;
+           return;
+       }
+       else if(func(q)==0.0)
+       {
+         cout<<"\033[1;31mOne of the value is : \033[0m"<<q<<endl;
+           return;
+       }
+       p++;
+       q++;
+    }
+    ld x,x1=0,d=1000;
+    int count=0;
+    while(d>0.0001)
+    {
+        count++;
+       x=(p*func(q)-q*func(p))/(func(q)-func(p));
+
+    if(func(x)==0.0)
+        break;
+
+    if(func(x)*func(p)<0.0)
+    {
+       q=x;
+    }
+    else
+    {
+      p=x;
+    }
+    d=fabs(x-x1);
+    x1=x;
+    }
+    cout<<setprecision(10)<<fixed;
+    cout<<"\033[1;31mOne of the value is : \033[0m"<<x<<endl;
+    cout<<"\033[1mThe total needed iteration is : \033[0m"<<count<<endl;
+    coefficient.clear();
+    a=b=c=d=0;
+    return;
+}
 
 void guass_seidel(int var)
 {
@@ -328,7 +423,7 @@ int main()
         if(l2!=-1 && l2!=0)
         {
            func:
-           cout<<"\033[1;32mFunction Type :\033[0m\n ";
+           cout<<"\033[1;32mFunction Type :\033[0m\n";
            cout<<"\033[1;31m-->\033[0m For \033[1mAlgebric Function\033[0m enter \033[1m1\033[0m\n";
            cout<<"\033[1;31m-->\033[0m For \033[1mTrigonometric Function\033[0m enter \033[1m2\033[0m\n";
            cout<<choose;
@@ -342,8 +437,8 @@ int main()
            {
              cout<<"\033[1mEnter \033[35mdegree\033[0m of the algebric function :\033[0m\n";
              cin>>degree;
-             degree=degree+1;
-             cout<<"\033[1;35m Enter the co-efficients for the function :\033[0m";
+             coefficient.resize(degree+1);
+             cout<<"\033[1mEnter the co-efficients for the function :\033[0m\n";
              for(int i=0;i<=degree;i++)
              {
                 cin>>coefficient[i];
