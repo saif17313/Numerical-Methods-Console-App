@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+float *coeff;
+int degree;
 void guass_seidel(int var)
 {
     float matx [var][var+ 1];
