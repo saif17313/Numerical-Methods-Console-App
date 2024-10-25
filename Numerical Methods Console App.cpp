@@ -1,7 +1,92 @@
 #include<bits/stdc++.h>
 using namespace std;
-float *coeff;
-int degree=0;
+float* coeff;
+int degree;
+float fx_forNewtonRaphson (float n) {
+    float res = 0;
+
+    for (int i = 0; i <= degree; i++) 
+        res += coeff[i] * (pow(n, degree - i));
+    
+    return res;   
+}
+float fdx_forNewtonRaphson(float n)
+{
+    float ress=0;
+    int dd=degree;
+    for(int i = 0; i <degree; i++)
+    {
+        ress+= (degree - i) * coeff[i] * pow(n, degree - i - 1);
+    }
+    return ress;
+}
+void newton_raphsonAlgebric()
+{
+    cout << "Degree: ";
+    cin >> degree;
+    coeff = new float[degree + 1];
+    int dd=degree;
+    for (int i = 0; i <= degree; i++) {
+        float Coeff;
+        cout << "Coeff: ";
+        cin >> Coeff;
+        coeff[i] = Coeff;
+    }
+    float st,end;
+    st=sqrt(pow (coeff[1] / coeff[0], 2) - 2 * (coeff[2] / coeff[0]));
+    end=-1*st;
+    cout<<st<<" "<<end<<endl;
+    vector<float>roots;
+    cout<<st<<" "<<end<<endl;
+    while(dd>0)
+    {
+
+    int itr=0;
+    cout<<"Enter Initial Guess"<<endl;
+    float x1,x,ffx,fxd;
+    cin>>x1;
+    
+    bool  is_duplicate = false;
+    do{
+         x=x1;
+         ffx=fx_forNewtonRaphson(x);
+         if(ffx==0){
+            break;
+         }
+     
+         fxd=fdx_forNewtonRaphson(x);
+         if(fxd==0)
+         {
+             cout << "Zero derivative; try a different initial guess." << endl;
+             break;
+         }
+         x1=x-(ffx/fxd);
+         itr++;
+         
+         cout<<fabs(x-x1)<<endl;
+
+
+    }while(fabs(x-x1)>=0.0001);
+    for(float root : roots)
+    {
+        if(root==x1)
+        {  is_duplicate=true;
+        cout<<"Iteration not counted"<<endl;
+        }
+
+    }
+     if (!is_duplicate) {
+            roots.push_back(x1);
+            cout<<"iteration "<<itr<<endl;
+            cout << "Root found: " << x1 << endl;
+            dd--;
+        }
+   
+    }
+    delete[] coeff;
+   
+
+}
 int a=0,b=0,c=0;
 
 double t_func(double x)
