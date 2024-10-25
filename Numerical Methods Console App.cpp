@@ -4,12 +4,12 @@ float *coeff;
 int degree=0;
 int a=0,b=0,c=0;
 
-double t_func(x)
+double t_func(double x)
 {
     return a * sin(x) + b * cos(x) + c * tan(x);
 }
 
-double t_derivative(x)
+double t_derivative(double x)
 {
     return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
 }
