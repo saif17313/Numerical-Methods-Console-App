@@ -214,7 +214,7 @@ void false_position()
     return;
 }
 
-void guass_seidel(int var)
+void gauss_seidel(int var)
 {
     float matx [var][var+ 1];
     cout<<"\033[1mEnter the equations below :\033[0m\n";
