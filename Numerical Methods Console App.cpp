@@ -15,5 +15,7 @@ int main()
     cout<<"\033[1;32m-->\033[0m For \033[1;33mMatrix Inversion\033[0m select \033[1;33m4\033[0m\n"<<endl;
     cout<<"\033[1;36m# Enter an option to select:\033[0m"<<endl;
     cin>>s;
+
+    
     return 0;
 }
