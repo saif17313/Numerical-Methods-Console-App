@@ -1,7 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 float *coeff;
-int degree;
+int degree=0;
+int a=0,b=0,c=0;
+
+double t_func(x)
+{
+    return a * sin(x) + b * cos(x) + c * tan(x);
+}
+
+double t_derivative(x)
+{
+    return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
+}
+
 void guass_seidel(int var)
 {
     float matx [var][var+ 1];
