@@ -49,6 +49,53 @@ void guass_seidel()
     }
     cout<<"Total iterations: "<<count;
 }
+void gaussJordanElimination(int n) {
+    vector<vector<double>>matrix(n,vector<double>(n+1));
+    cout<<"Enter the augmented matrix:"<<endl;
+    for(int i=0;i<n;i++) 
+    {
+        for (int j=0;j<=n;j++) 
+        {
+            cin>>matrix[i][j];
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        int max=i;
+        for (int k=i+1;k<n;k++)
+        {
+            if(fabs(matrix[k][i])>fabs(matrix[max][i]))
+            {
+                max=k;
+            }
+        }
+        swap(matrix[i], matrix[max]);
+        if (fabs(matrix[i][i]) < 1e-10) {
+            cout << "No unique solution exists."<<endl;
+            return;
+        }
+        double pivot=matrix[i][i];
+        for (int k=0;k<=n;k++) {
+            matrix[i][k]/= pivot;
+        }
+
+        for (int j=0;j<n;j++)
+        {
+            if (j!=i) {
+                double factor=matrix[j][i];
+                for (int k=0; k<=n;k++) {
+                    matrix[j][k]-=factor*matrix[i][k];
+                }
+            }
+        }
+    }
+
+    cout << "Solution:\n"<<endl;
+    for (int i=0;i<n;i++) {
+        cout <<"x"<<i+1<<" = "<<matrix[i][n]<< endl;
+    }
+}
+
 
 int main()
 {
