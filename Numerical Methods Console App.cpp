@@ -1,7 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
 float* coeff;
-int degree;
+vector<double> coefficient;
+int degree=0;
+int a=0,b=0,c=0,d=0,ft=0;
+
+double function(double x)
+{
+    if(ft==1){
+        double result = 0.0;
+         for (int i = 0; i <= degree; i++) {
+        result += coefficient[i] * pow(x, degree-i);
+      }  
+      return result;  
+    }
+    else
+    {
+        return a * sin(x) + b * cos(x) + c * tan(x) + d;
+    }
+}
+
+double derivative(double x)
+{
+   if(ft==1){
+    double result=0.0;
+    for (int i = 0; i <= degree; i++) {
+        result += (degree-i)*coefficient[i] * pow(x, degree-i-1);
+      } 
+      return result; 
+
+   }
+   else{
+   return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
+   }
+}
 float fx_forNewtonRaphson (float n) {
     float res = 0;
 
@@ -22,8 +54,6 @@ float fdx_forNewtonRaphson(float n)
 }
 void newton_raphsonAlgebric()
 {
-    cout << "Degree: ";
-    cin >> degree;
     coeff = new float[degree + 1];
     int dd=degree;
     for (int i = 0; i <= degree; i++) {
@@ -87,21 +117,12 @@ void newton_raphsonAlgebric()
    
 
 }
-int a=0,b=0,c=0;
 
-double t_func(double x)
-{
-    return a * sin(x) + b * cos(x) + c * tan(x);
-}
-
-double t_derivative(double x)
-{
-    return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
-}
 
 void guass_seidel(int var)
 {
     float matx [var][var+ 1];
+    cout<<"\033[1mEnter the equations below :\033[0m\n";
     for(int i=0;i<var;i++)
     {
         for(int j=0;j<=var;j++)
@@ -244,16 +265,127 @@ void gaussJordanElimination(int n) {
 int main()
 {
     int w = 80; 
-    string message = "\033[1mKUET Numerical Methods Console Application\033[0m"; 
+    string message = "\033[1;34mKUET Numerical Methods Console Application\033[0m"; 
+    string linear="\033[1;32mMethods for solving linear equations :\033[0m\n\033[1;32m-->\033[0m For \033[1;33mJacobi iterative method\033[0m enter \033[1;33m1\033[0m\n\033[1;32m-->\033[0m For \033[1;33mGauss-Seidel iterative method\033[0m enter \033[1;33m2\033[0m\n\033[1;32m-->\033[0m For \033[1;33mGauss elimination\033[0m enter \033[1;33m3\033[0m\n\033[1;32m-->\033[0m For \033[1;33mGausss-Jordan elimination\033[0m enter \033[1;33m4\033[0m\n\033[1;32m-->\033[0m For \033[1;33mLU factorization\033[0m enter \033[1;33m5\033[0m\n\033[1;32m-->\033[0m For \033[1;33mMain Menu\033[0m enter \033[1;33m0\033[0m\n\033[1;32m-->\033[0m To  \033[1;31mEXIT\033[0m enter \033[1;31m-1\033[0m\n";
+    string error="\003[1;31mInvalid Input ! Try again..\033[0m\n";
+    string option="\033[1;32m-->\033[0m For \033[1;33mSolution of Linear Equations\033[0m enter \033[1;33m1\033[0m\n\033[1;32m-->\033[0m For \033[1;33mSolution of Non-Linear Equations\033[0m enter \033[1;33m2\033[0m\n\033[1;32m-->\033[0m For \033[1;33mSolution of Differential Equations\033[0m enter \033[1;33m3\033[0m\n\033[1;32m-->\033[0m For \033[1;33mMatrix Inversion\033[0m enter \033[1;33m4\033[0m\n\033[1;32m-->\033[0m To  \033[1;31mEXIT\033[0m enter \033[1;31m-1\033[0m\n";
+    string choose="\033[1;36m# Enter an option to select :\033[0m\n";
+    string nonlinear="\033[1;32mMethods for solving non-linear equations :\033[0m\n\033[1;32m-->\033[0m For \033[1;33mBi-section method\033[0m enter \033[1;33m1\033[0m\n\033[1;32m-->\033[0m For \033[1;33mFalse position method\033[0m enter \033[1;33m2\033[0m\n\033[1;32m-->\033[0m For \033[1;33mSecant method\033[0m enter \033[1;33m3\033[0m\n\033[1;32m-->\033[0m For \033[1;33mNewton-Raphson method\033[0m enter \033[1;33m4\033[0m\n\033[1;32m-->\033[0m For \033[1;33mMain Menu\033[0m enter \033[1;33m0\033[0m\n\033[1;32m-->\033[0m To  \033[1;31mEXIT\033[0m enter \033[1;31m-1\033[0m\n";
+    cout<<"\n";
     cout << setw((w + message.length() - 9) / 2) << message << endl;
+    cout<<"\n";
     int s;
-    cout<<"\033[1;32m-->\033[0m For \033[1;33mSolution of Linear Equations\033[0m select \033[1;33m1\033[0m"<<endl;
-    cout<<"\033[1;32m-->\033[0m For \033[1;33mSolution of Non-Linear Equations\033[0m select \033[1;33m2\033[0m"<<endl;
-    cout<<"\033[1;32m-->\033[0m For \033[1;33mSolution of Differential Equations\033[0m select \033[1;33m3\033[0m"<<endl;
-    cout<<"\033[1;32m-->\033[0m For \033[1;33mMatrix Inversion\033[0m select \033[1;33m4\033[0m\n"<<endl;
-    cout<<"\033[1;36m# Enter an option to select:\033[0m"<<endl;
+    main:
+    cout<<option;
+    cout<<choose;
     cin>>s;
+    switch(s){
+    case -1:
+        return 0;
+    case 1:
+        linearr:
+         int l1,n;
+         cout<<linear;
+         cout<<choose;
+         cin>>l1;
+         if(l1!=0 && l1!=-1)
+         {
+         cout<<"Enter variable no.:\n";
+         cin>>n;
+         }
+         switch(l1)
+         {
+            case 0:
+              goto main;
+              break;
+            case -1:
+              return 0;
+            case 1:
+              jacobi_iterative(n);
+              break;
+            case 2:
+              gauss_seidel(n);
+              break;
+            case 3:
+              gaussElimination(n);
+              break;
+            case 4:
+              gaussJordanElimination(n);
+              break;
+            case 5:
+              break;
+            default:
+              cout<<error;
+              goto linearr;  
+         }
+         break;
+    case 2:
+        non_linear:
+         int l2;
+         cout<<nonlinear;
+         cout<<choose;
+         cin>>l2;
+        if(l2!=-1 && l2!=0)
+        {
+           func:
+           cout<<"\033[1;32mFunction Type :\033[0m\n ";
+           cout<<"\033[1;31m-->\033[0m For \033[1mAlgebric Function\033[0m enter \033[1m1\033[0m\n";
+           cout<<"\033[1;31m-->\033[0m For \033[1mTrigonometric Function\033[0m enter \033[1m2\033[0m\n";
+           cout<<choose;
+           cin>>ft;
+           if(ft!=1 && ft!=2)
+           {
+             cout<<error;
+             goto func;
+           }
+           if(ft==1)
+           {
+             cout<<"\033[1mEnter \033[35mdegree\033[0m of the algebric function :\033[0m\n";
+             cin>>degree;
+             degree=degree+1;
+             cout<<"\033[1;35m Enter the co-efficients for the function :\033[0m";
+             for(int i=0;i<=degree;i++)
+             {
+                cin>>coefficient[i];
+             }
+           }
+           else
+           {
+              cout<<"\033[1mEnter \033[1;35ma, b, c\033[0m in the \033[1;35m asin(x) + bcos(x) + ctan(x) +d\033[0m :\n";
+              cin>>a>>b>>c>>d;
+           }
+        }
+        switch(l2){
+            case 0:
+              goto main;
+              break;
+            case -1:
+              return 0;
+            case 1:
+              jacobi_iterative(n);
+              break;
+            case 2:
+              gauss_seidel(n);
+              break;
+            case 3:
+              gaussElimination(n);
+              break;
+            case 4:
+              gaussJordanElimination(n);
+              break;
+            case 5:
+              break;
+            default:
+              cout<<error;
+              goto non_linear;  
+        }
+        break;
+    default:
+          cout<<error;
+          goto main;
+          break;
 
-
+         
+    }
     return 0;
 }
