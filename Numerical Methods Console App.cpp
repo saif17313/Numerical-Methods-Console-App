@@ -1,11 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void guass_seidel()
+void guass_seidel(int var)
 {
-    cout << " Enter No of variables: ";
-    int var; 
-    cin >> var;
     float matx [var][var+ 1];
     for(int i=0;i<var;i++)
     {
