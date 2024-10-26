@@ -200,7 +200,7 @@ void lufactorization(int n) {
     cout<<"\033[1;35mSolution vector x is:\033[0m"<<endl;
     for (int i=0;i<n;i++)
     {
-        cout<<"\033[1m"<<x[i]<< "  \033[0m";
+        cout<<"\033[1mx"<<(i+1)<<" = \033[0m"<<x[i]<<endl;
     }
     cout<<endl;
 }
@@ -713,6 +713,7 @@ int main()
               return 0;
             case 1:
               bisection();
+              coefficient.clear();
               cout<<again;
               cin>>chk;
               if(chk==1)
@@ -722,6 +723,7 @@ int main()
               break;
             case 2:
               false_position();
+              coefficient.clear();
               cout<<again;
               cin>>chk;
               if(chk==1)
@@ -731,6 +733,7 @@ int main()
               break;
             case 3:
               secant();
+              coefficient.clear();
               cout<<again;
               cin>>chk;
               if(chk==1)
@@ -740,6 +743,7 @@ int main()
               break;
             case 4:
               newton_raphsonAlgebric();
+              coefficient.clear();
               cout<<again;
               cin>>chk;
               if(chk==1)
