@@ -618,7 +618,7 @@ int main()
                 return 0;
               break;
             case 4:
-              //newton_raphsonAlgebric();
+              newton_raphsonAlgebric();
               cout<<again;
               cin>>chk;
               if(chk==1)
