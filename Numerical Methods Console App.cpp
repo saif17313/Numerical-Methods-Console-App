@@ -396,7 +396,7 @@ int main()
             case -1:
               return 0;
             case 1:
-              jacobi_iterative(n);
+              jacobian(n);
               break;
             case 2:
               gauss_seidel(n);
@@ -408,6 +408,7 @@ int main()
               gaussJordanElimination(n);
               break;
             case 5:
+             //lu
               break;
             default:
               cout<<error;
@@ -457,16 +458,16 @@ int main()
             case -1:
               return 0;
             case 1:
-              jacobi_iterative(n);
+              bisection();
               break;
             case 2:
-              gauss_seidel(n);
+              false_position();
               break;
             case 3:
-              gaussElimination(n);
+              //secant();
               break;
             case 4:
-              gaussJordanElimination(n);
+              newton_raphsonAlgebric();
               break;
             case 5:
               break;
