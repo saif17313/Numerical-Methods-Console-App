@@ -150,8 +150,10 @@ void gauss_seidel(int var)
     vector<ld>prev(var,0.0);
     vector<ld>error(var,0.0);
     int count=0;
+    const ld threshold = 0.00001;
     while(itr--)
     {
+        bool converged = true;
       for(int i=0;i<var;i++)
       { 
         ld sum=matx[i][var];
@@ -165,13 +167,13 @@ void gauss_seidel(int var)
 
         }
         curV[i]=sum/matx[i][i];
-        curV[i]=fabs(curV[i]);
         error[i]=fabs(curV[i]-prev[i]);
+         if (error[i] > threshold) converged = false;
+        
         prev[i]=curV[i];
       }
-      cout<<endl;
       count++;
-      if(error[0]<0.00001)break;
+      if (converged) break;
       
     }
     cout<<"The roots for linear equations\n";
