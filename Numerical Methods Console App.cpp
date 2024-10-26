@@ -36,7 +36,57 @@ ld derivative(ld x)
    return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
    }
 }
+void newton_raphsonAlgebric()
+{
+    int dd=degree;
+    cout<<endl;
+    float st,end;
+    st=sqrt(pow (coefficient[1] / coefficient[0], 2) - 2 * (coefficient[2] / coefficient[0]));
+    end=-1*st;
+    cout<<st<<" "<<end<<endl;
+    vector<float>roots;
+    while(dd>0)
+    {
+    int itr=0;
+    cout<<"Enter Initial Guess"<<endl;
+    ld x1,x,ffx,fxd;
+    cin>>x1;
+    
+    bool  is_duplicate = false;
+    do{
+         x=x1;
+         ffx=func(x);
+         if(ffx==0){
+            break;
+         }
+     
+         fxd=derivative(x);
+         if(fxd==0)
+         {
+             cout << "Zero derivative; try a different initial guess." << endl;
+             break;
+         }
+         x1=x-(ffx/fxd);
+         itr++;
 
+    }while(fabs(x-x1)>=0.00001);
+    for(float root : roots)
+    {
+        if(root==x1)
+        {  is_duplicate=true;
+        cout<<"Iteration not counted"<<endl;
+        }
+
+    }
+     if (!is_duplicate) {
+            roots.push_back(x1);
+            cout<<"iteration "<<itr<<endl;
+            cout << "Root found: " << x1 << endl;
+            dd--;
+        }
+   
+    }
+}
 void bisection()
 {
     ld p=-1000,q=-999;
