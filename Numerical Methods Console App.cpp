@@ -764,7 +764,7 @@ int main()
           }
           switch(l4){
             case 1:
-              //range_kutta();
+              range_kutta();
               cout<<again;
               cin>>chk;
               if(chk==1)
