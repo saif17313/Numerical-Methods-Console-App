@@ -213,10 +213,9 @@ void false_position()
     a=b=c=d=0;
     return;
 }
-
 void gauss_seidel(int var)
 {
-    float matx [var][var+ 1];
+    ld matx [var][var+ 1];
     cout<<"\033[1mEnter the equations below :\033[0m\n";
     for(int i=0;i<var;i++)
     {
@@ -226,19 +225,18 @@ void gauss_seidel(int var)
 
         }
     }
-    int itr;
-    cout<<"Enter  the number of iterations: ";
-    cin>>itr;
+    int itr=50;
+  
     cout<<endl;
-    vector<float>curV(var,0.0);
-    vector<float>prev(var,0.0);
-    vector<float>error(var,0.0);
+    vector<ld>curV(var,0.0);
+    vector<ld>prev(var,0.0);
+    vector<ld>error(var,0.0);
     int count=0;
     while(itr--)
     {
       for(int i=0;i<var;i++)
       { 
-        float sum=matx[i][var];
+        ld sum=matx[i][var];
         for(int j=0;j<var;j++)
         {
            
@@ -250,15 +248,21 @@ void gauss_seidel(int var)
         }
         curV[i]=sum/matx[i][i];
         curV[i]=fabs(curV[i]);
-        cout<<curV[i]<<" ";
         error[i]=fabs(curV[i]-prev[i]);
         prev[i]=curV[i];
       }
       cout<<endl;
-      if(error[0]<0.00001)break;
       count++;
+      if(error[0]<0.00001)break;
+      
     }
-    cout<<"Total iterations: "<<count;
+    cout<<"The roots for linear equations\n";
+   for(ld root : curV)
+   {
+    cout<< root <<" ";
+   }
+
+    cout<<"\nTotal iterations: "<<count<<endl;
 }
 void gaussElimination(int n) {
     vector<vector<ld>> matrix(n,vector<ld>(n+1));
