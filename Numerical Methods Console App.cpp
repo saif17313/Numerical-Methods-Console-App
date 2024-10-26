@@ -57,20 +57,20 @@ void runge_kutta()
 {
   ld k1,k2,k3,k4,x0,y0,xn;
   int itr;
-  cout<<"Enter h,x0,y0,xn value : ";
+  cout<<"Enter \033[1;35mh , x0 , y0 , xn\033[0m value : \n";
   cin>>h>>x0>>y0>>xn;
   
     int choice;
-    cout << "Choose an equation:\n1) dy/dx = ax + by+c\n2) dy/dx = a*sin(x) + b*cos(x)+c\n3)dy/dx=a*sin(x)+bcos(y)+c\n";
-    cout<<"enter choice: ";
+    cout << "\033[1mChoose an equation:\033[0m\n\033[1m1)\033[0m \033[1;35mdy/dx = ax + by+c\033[0m\n\033[1m2)\033[0m \033[1;35mdy/dx = a*sin(x) + b*cos(x)+c\033[0m\n\033[1m3)\033[0m\033[1;35mdy/dx=a*sin(x)+bcos(y)+c\033[0m\n";
+    cout<<"\033[1mEnter choice: \033[0m\n";
     cin >> choice; 
-    cout << "Enter a b c:\n ";
+    cout << "Enter \033[1;35ma , b , c :\033[0m\n";
     cin>>a1>>b1>>c1;
     if(choice!=1)
   itr=ceil((xn*3.1416)/h);
   else itr=ceil((xn)/h);
    cout<<"Total iterations: "<<itr<<endl;
-    cout<<"x0: "<<x0<< " "<<"y0 :"<<y0<<endl;
+    cout<<"\033[1mx0 : \033[0m"<<x0<< " "<<"\033[1my0 :\033[0m"<<y0<<endl;
    for(int i=1;i<itr;i++)
     {
      k1=h*fxGEn(x0,y0,choice);
@@ -79,7 +79,7 @@ void runge_kutta()
      k4=h*fxGEn(x0+h,y0+k3,choice);
      y0= y0+((1/6.0)*(k1+2*k2+2*k3+k4));
      x0=x0+h;
-     cout<<"x= "<<x0<< " "<<"y= "<<y0<<endl;
+     cout<<"\033[1mx = \033[0m"<<x0<< " "<<"\033[1my = \033[0m"<<y0<<endl;
     }
 
 
@@ -128,19 +128,19 @@ void jacobian(int n) {
         prev=cur;
         iteration_count++;
     }
-    cout<<"\nThe Result is:\n";
+    cout<<"\n\033[1;35mThe Result is :\033[0m\n";
     for(int i=0;i<n;i++) 
     {
-        cout<<"x"<<(i + 1)<<" = "<<cur[i]<<endl;
+        cout<<"\033[1mx"<<(i + 1)<<" = \033[0m"<<cur[i]<<endl;
     }
     cout<<"The total number of iterations required : "<<iteration_count<<endl;
 }
 
 void lufactorization(int n) {
-    vector<vector<double>> matrix(n, vector<double>(n, 0.0));
-    vector<vector<double>> L(n, vector<double>(n, 0.0));
-    vector<vector<double>> U(n, vector<double>(n, 0.0));
-    vector<double> b(n, 0.0);
+    vector<vector<ld>> matrix(n, vector<ld>(n, 0.0));
+    vector<vector<ld>> L(n, vector<ld>(n, 0.0));
+    vector<vector<ld>> U(n, vector<ld>(n, 0.0));
+    vector<ld> b(n, 0.0);
 
    cout<<"Enter coefficients \033[1;35ma1, a2, ..., an\033[0m and constant \033[1;35md\033[0m for equation \033[0m" <<" (format: \033[1;35ma1x1 + a2x2 + ... + anxn = d\033[0m): \033[0m\n";
     for(int i=0;i<n;i++)
@@ -154,7 +154,7 @@ void lufactorization(int n) {
     for(int i=0;i<n;i++)
      {
         for(int k=i;k<n;k++) {
-            double sum=0.0;
+            ld sum=0.0;
             for (int j=0;j<i;j++)
              {
                 sum+=L[i][j]*U[j][k];
@@ -168,7 +168,7 @@ void lufactorization(int n) {
                 L[i][i]=1;
             } else
             {
-                double sum=0.0;
+                ld sum=0.0;
                 for (int j=0;j<i;j++)
                  {
                     sum+=L[k][j]*U[j][i];
@@ -177,20 +177,20 @@ void lufactorization(int n) {
             }
         }
     }
-    vector<double>y(n,0.0);
+    vector<ld>y(n,0.0);
     for (int i=0;i<n;i++)
      {
-        double sum=0.0;
+       ld sum=0.0;
         for (int j=0;j<i;j++)
         {
             sum+=L[i][j]*y[j];
         }
         y[i]=(b[i]-sum);
     }
-    vector<double>x(n,0.0);
+    vector<ld>x(n,0.0);
     for (int i =n-1;i>=0;i--)
      {
-        double sum=0.0;
+        ld sum=0.0;
         for (int j=i+1;j<n;j++)
         {
             sum+=U[i][j]*x[j];
@@ -218,7 +218,7 @@ void newton_raphsonAlgebric()
     while(dd>0)
     {
     int itr=0;
-    cout<<"Enter Initial Guess"<<endl;
+    cout<<"\033[1mEnter Initial Guess :\033[0m\n"<<endl;
     ld x1,x,ffx,fxd;
     cin>>x1;
     
@@ -233,7 +233,7 @@ void newton_raphsonAlgebric()
          fxd=derivative(x);
          if(fxd==0)
          {
-             cout << "Zero derivative; try a different initial guess." << endl;
+             cout << "\033[1;31mZero derivative; try a different initial guess.\033[0m" << endl;
              break;
          }
          x1=x-(ffx/fxd);
@@ -251,7 +251,7 @@ void newton_raphsonAlgebric()
      if (!is_duplicate) {
             roots.push_back(x1);
             cout<<"iteration "<<itr<<endl;
-            cout << "Root found: " << x1 << endl;
+            cout << "\033[1mRoot found: \033[0m" << x1 << endl;
             dd--;
         }
    
@@ -269,7 +269,7 @@ void bisection()
        }
        else if(func(q)==0.0)
        {
-         cout<<"\033[1;31mOne of the value is : \033[0m"<<q<<endl;
+         cout<<"\033[1;31mOne of the root is : \033[0m"<<q<<endl;
            return;
        }
        p++;
@@ -297,7 +297,7 @@ void bisection()
     x1=x;
     }
     cout<<setprecision(10)<<fixed;
-    cout<<"\033[1;31mOne of the value is : \033[0m"<<x<<endl;
+    cout<<"\033[1;31mOne of the root is : \033[0m"<<x<<endl;
     cout<<"\033[1mThe total needed iteration is : \033[0m"<<count<<endl;
     coefficient.clear();
     a=b=c=d=0;
@@ -312,12 +312,12 @@ void false_position()
     {
        if(func(p)==0.0)
        {
-           cout<<"\033[1;31mOne of the value is : \033[0m"<<p<<endl;
+           cout<<"\033[1;31mOne of the root is : \033[0m"<<p<<endl;
            return;
        }
        else if(func(q)==0.0)
        {
-         cout<<"\033[1;31mOne of the value is : \033[0m"<<q<<endl;
+         cout<<"\033[1;31mOne of the root is : \033[0m"<<q<<endl;
            return;
        }
        p++;
@@ -345,7 +345,7 @@ void false_position()
     x1=x;
     }
     cout<<setprecision(10)<<fixed;
-    cout<<"\033[1;31mOne of the value is : \033[0m"<<x<<endl;
+    cout<<"\033[1;31mOne of the root is : \033[0m"<<x<<endl;
     cout<<"\033[1mThe total needed iteration is : \033[0m"<<count<<endl;
     coefficient.clear();
     a=b=c=d=0;
@@ -396,17 +396,18 @@ void gauss_seidel(int var)
       if (converged) break;
       
     }
-    cout<<"The roots for linear equations\n";
+    cout<<"\033[1;35mThe roots for linear equations :\033[0m\n";
    for(ld root : curV)
    {
-    cout<< root <<" ";
+    cout<< root <<"  ";
    }
 
-    cout<<"\nTotal iterations: "<<count<<endl;
+    cout<<"\n\033[1mTotal iterations : \033[0m"<<count<<endl;
 }
 void gaussElimination(int n) {
     vector<vector<ld>> matrix(n,vector<ld>(n+1));
-    cout<<"Enter the augmented matrix:"<<endl;
+    cout<<"Enter coefficients \033[1;35ma1, a2, ..., an\033[0m and constant \033[1;35md\033[0m for equation \033[0m" <<" (format: \033[1;35ma1x1 + a2x2 + ... + anxn = d\033[0m): \033[0m\n";
+
     for (int i=0;i<n;i++) {
         for (int j=0;j<=n;j++) {
             cin>>matrix[i][j];
@@ -455,7 +456,8 @@ void gaussElimination(int n) {
 
 void gaussJordanElimination(int n) {
     vector<vector<ld>>matrix(n,vector<ld>(n+1));
-    cout<<"Enter the augmented matrix:"<<endl;
+    cout<<"Enter coefficients \033[1;35ma1, a2, ..., an\033[0m and constant \033[1;35md\033[0m for equation \033[0m" <<" (format: \033[1;35ma1x1 + a2x2 + ... + anxn = d\033[0m): \033[0m\n";
+
     for(int i=0;i<n;i++) 
     {
         for (int j=0;j<=n;j++) 
