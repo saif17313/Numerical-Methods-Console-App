@@ -36,6 +36,58 @@ ld derivative(ld x)
    return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
    }
 }
+void jacobian(int n) {
+    vector<vector<ld>> A(n, vector<ld>(n));
+    vector<ld> B(n);
+    cout<<"Enter coefficients \033[1;35ma1, a2, ..., an\033[0m and constant \033[1;35md\033[0m for equation \033[0m" <<" (format: \033[1;35ma1x1 + a2x2 + ... + anxn = d\033[0m): \033[0m\n";
+    for(int i=0;i<n;i++) 
+    {
+        for(int j=0;j<n;j++)
+        {
+            cin>>A[i][j];
+        }
+        cin>>B[i];
+    }
+
+    vector<ld> cur(n, 0.0),prev(n, 0.0);
+    const ld tolerance=0.00001;
+    int iteration_count=1;
+    while(true) 
+    {
+        for(int i=0;i<n;i++) 
+        {
+            ld sum=B[i];
+            for(int j=0;j<n;j++) 
+            {
+                if(i!=j) 
+                {
+                    sum-=A[i][j]*prev[j];
+                }
+            }
+            cur[i]=sum/A[i][i];
+        }
+
+        ld maxError=0.0;
+        for(int i=0;i<n;i++) 
+        {
+            ld error=fabs(cur[i] - prev[i]);
+            maxError=max(maxError, error);
+        }
+        if(maxError<=tolerance) 
+        {
+            break;
+        }
+        prev=cur;
+        iteration_count++;
+    }
+    cout<<"\nThe Result is:\n";
+    for(int i=0;i<n;i++) 
+    {
+        cout<<"x"<<(i + 1)<<" = "<<cur[i]<<endl;
+    }
+    cout<<"The total number of iterations required : "<<iteration_count<<endl;
+}
+
 void newton_raphsonAlgebric()
 {
     int dd=degree;
