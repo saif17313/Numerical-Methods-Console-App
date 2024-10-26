@@ -1,10 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long double ld;
-float* coeff;
 vector<ld> coefficient;
 int degree=0;
-ld a=0,b=0,c=0,d=0,ft=0;
+ld a=0,b=0,c=0,d=0;
+int ft;
+int chk;
 
 ld func(ld x)
 {
