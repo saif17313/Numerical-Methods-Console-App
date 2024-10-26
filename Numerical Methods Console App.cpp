@@ -397,9 +397,10 @@ void gauss_seidel(int var)
       
     }
     cout<<"\033[1;35mThe roots for linear equations :\033[0m\n";
+    int ct=1;
    for(ld root : curV)
    {
-    cout<< root <<"  ";
+    cout<<"\033[1mx"<<(ct++)<<" = \033[0m" root <<endl;
    }
 
     cout<<"\n\033[1mTotal iterations : \033[0m"<<count<<endl;
@@ -448,9 +449,9 @@ void gaussElimination(int n) {
         }
     }
 
-    cout << "Solution:"<<endl;
-    for (int i = 0; i < n; i++) {
-        cout <<"x"<<i+1<<" = "<<matrix[i][n]<< endl;
+    cout << "\033[1;35mSolution :\033[0m\n"<<endl;
+    for (int i=0;i<n;i++) {
+        cout <<"\033[1mx"<<i+1<<" = \033[0m"<<matrix[i][n]<< endl;
     }
 }
 
@@ -477,7 +478,7 @@ void gaussJordanElimination(int n) {
         }
         swap(matrix[i], matrix[max]);
         if (fabs(matrix[i][i]) < 1e-10) {
-            cout << "No unique solution exists."<<endl;
+            cout << "\033[1;31mNo unique solution exists.\033[0m"<<endl;
             return;
         }
         ld pivot=matrix[i][i];
@@ -496,9 +497,9 @@ void gaussJordanElimination(int n) {
         }
     }
 
-    cout << "Solution:\n"<<endl;
+    cout << "\033[1;35mSolution :\033[0m\n"<<endl;
     for (int i=0;i<n;i++) {
-        cout <<"x"<<i+1<<" = "<<matrix[i][n]<< endl;
+        cout <<"\033[1mx"<<i+1<<" = \033[0m"<<matrix[i][n]<< endl;
     }
 }
 
@@ -578,7 +579,7 @@ while (true)
      f2=func(x2);
      if(f2-f1==0)
      {
-         cout<<"division by 0,undefined"<<endl;
+         cout<<"\033[1;31mdivision by 0,undefined\033[0m"<<endl;
          return x3;
      }
      x3=x2-((f2*(x2-x1))/(f2-f1));
@@ -589,7 +590,7 @@ while (true)
     x2=x3;
 }
     
-     cout<<"Total needed iteration for secant method"<< count<< endl;
+     cout<<"\033[1mTotal needed iteration for secant method : \033[0m"<< count<< endl;
      return x3;
 }
 
@@ -694,7 +695,7 @@ int main()
         {
       
              ft=1;
-             cout<<"\033[1;31m-->\033[0m Enter an \033[1mAlgebric Function\033[0m\n";
+             cout<<"\033[1;32m-->\033[0m Enter an \033[1;35mAlgebric Function\033[0m\n";
              cout<<"\033[1mEnter \033[35mdegree\033[0m of the algebric function :\033[0m\n";
              cin>>degree;
              coefficient.resize(degree+1);
