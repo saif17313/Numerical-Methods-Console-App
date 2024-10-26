@@ -8,7 +8,7 @@ int ft;
 int chk;
 #define pi 3.1416;
 ld h;
-ld a, b, c;
+ld a1, b1, c1;
 ld func(ld x)
 {
     if(ft==1){
@@ -43,13 +43,13 @@ ld fxGEn(ld x,ld y,int choice) {
 
     if (choice == 1) {
         
-         return a*x + b * y+c; 
+         return a1*x + b1 * y+c1; 
     } else if (choice==2){
         
-         return (a*sin(x) + b*cos(x)+c);
+         return (a1*sin(x) + b1*cos(x)+c1);
     }
     else{
-      return (a*sin(x) + b*cos(y)+c);
+      return (a1*sin(x) + b1*cos(y)+c1);
 
     }
 }
@@ -61,19 +61,16 @@ void runge_kutta()
   cin>>h>>x0>>y0>>xn;
   
     int choice;
-    cout << "Choose an equation:\n1) dy/dx = ax + by+c\n2) dy/dx = a*sin(x) + b*cos(x)+c\n3)dy/dx=a*sin(x)+bcos(y)+c";
+    cout << "Choose an equation:\n1) dy/dx = ax + by+c\n2) dy/dx = a*sin(x) + b*cos(x)+c\n3)dy/dx=a*sin(x)+bcos(y)+c\n";
+    cout<<"enter choice: ";
     cin >> choice; 
-    cout << "Enter a: ";
-    cin >> a;
-    cout << "Enter b: ";
-    cin >> b;
-    cout << "Enter c: ";
-    cin >> c;
+    cout << "Enter a b c:\n ";
+    cin>>a1>>b1>>c1;
     if(choice!=1)
   itr=ceil((xn*3.1416)/h);
   else itr=ceil((xn)/h);
-   cout<<itr<<endl;
-    cout<<x0<< " "<<y0<<endl;
+   cout<<"Total iterations: "<<itr<<endl;
+    cout<<"x0: "<<x0<< " "<<"y0 :"<<y0<<endl;
    for(int i=1;i<itr;i++)
     {
      k1=h*fxGEn(x0,y0,choice);
@@ -82,7 +79,7 @@ void runge_kutta()
      k4=h*fxGEn(x0+h,y0+k3,choice);
      y0= y0+((1/6.0)*(k1+2*k2+2*k3+k4));
      x0=x0+h;
-     cout<<x0<< " "<<y0<<endl;
+     cout<<"x= "<<x0<< " "<<"y= "<<y0<<endl;
     }
 
 
@@ -764,7 +761,7 @@ int main()
           }
           switch(l4){
             case 1:
-              range_kutta();
+              runge_kutta();
               cout<<again;
               cin>>chk;
               if(chk==1)
