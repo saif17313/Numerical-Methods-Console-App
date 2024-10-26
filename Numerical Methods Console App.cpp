@@ -400,7 +400,7 @@ void gauss_seidel(int var)
     int ct=1;
    for(ld root : curV)
    {
-    cout<<"\033[1mx"<<(ct++)<<" = \033[0m" root <<endl;
+    cout<<"\033[1mx"<<(ct++)<<" = \033[0m" <<root <<endl;
    }
 
     cout<<"\n\033[1mTotal iterations : \033[0m"<<count<<endl;
