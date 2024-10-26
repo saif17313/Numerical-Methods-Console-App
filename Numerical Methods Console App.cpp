@@ -355,10 +355,7 @@ void gaussJordanElimination(int n) {
         cout <<"x"<<i+1<<" = "<<matrix[i][n]<< endl;
     }
 }
-ld func(ld x)
-{
-    return a*pow(x,5)+b*pow(x,4)+c*pow(x,3)+d*pow(x,2)+e*x+f;
-}
+
 
 ld secant()
 {
