@@ -1,4 +1,4 @@
-Numerical Methods Console App
+##Numerical Methods Console App
 
 This is the repository for a C++ console application to implement and solve various mathematical problems with the use of numerical methods. This repository houses functions related to root-finding in non-linear equations, solving systems of linear equations, differential equations, and matrix operations.
 
