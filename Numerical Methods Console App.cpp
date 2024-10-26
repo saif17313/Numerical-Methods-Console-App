@@ -355,6 +355,36 @@ void gaussJordanElimination(int n) {
         cout <<"x"<<i+1<<" = "<<matrix[i][n]<< endl;
     }
 }
+ld func(ld x)
+{
+    return a*pow(x,5)+b*pow(x,4)+c*pow(x,3)+d*pow(x,2)+e*x+f;
+}
+
+ld secant()
+{
+    ld x1=0,x2=5,x3=0,f1,f2;
+int count=0;
+while (true)
+{
+    count++; 
+     f1=func(x1);
+     f2=func(x2);
+     if(f2-f1==0)
+     {
+         cout<<"division by 0,undefined"<<endl;
+         return x3;
+     }
+     x3=x2-((f2*(x2-x1))/(f2-f1));
+    
+    if(fabs(func(x3))<1e-6)
+    break;
+    x1=x2;
+    x2=x3;
+}
+    
+     cout<<"Total needed iteration for secant method"<< count<< endl;
+     return x3;
+}
 
 
 int main()
