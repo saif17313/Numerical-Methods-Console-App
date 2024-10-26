@@ -517,21 +517,12 @@ int main()
          cout<<nonlinear;
          cout<<choose;
          cin>>l2;
-        if(l2!=-1 && l2!=0)
+
+       if(l2!=-1 && l2!=0)
         {
-           func:
-           cout<<"\033[1;32mFunction Type :\033[0m\n";
-           cout<<"\033[1;31m-->\033[0m For \033[1mAlgebric Function\033[0m enter \033[1m1\033[0m\n";
-           cout<<"\033[1;31m-->\033[0m For \033[1mTrigonometric Function\033[0m enter \033[1m2\033[0m\n";
-           cout<<choose;
-           cin>>ft;
-           if(ft!=1 && ft!=2)
-           {
-             cout<<error;
-             goto func;
-           }
-           if(ft==1)
-           {
+      
+             ft=1;
+             cout<<"\033[1;31m-->\033[0m Enter an \033[1mAlgebric Function\033[0m\n";
              cout<<"\033[1mEnter \033[35mdegree\033[0m of the algebric function :\033[0m\n";
              cin>>degree;
              coefficient.resize(degree+1);
@@ -540,12 +531,6 @@ int main()
              {
                 cin>>coefficient[i];
              }
-           }
-           else
-           {
-              cout<<"\033[1mEnter \033[1;35ma, b, c, d\033[0m in the \033[1;35m asin(x) + bcos(x) + ctan(x) +d\033[0m :\n";
-              cin>>a>>b>>c>>d;
-           }
         }
         switch(l2){
             case 0:
