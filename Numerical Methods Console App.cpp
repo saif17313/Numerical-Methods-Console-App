@@ -6,7 +6,9 @@ int degree=0;
 ld a=0,b=0,c=0,d=0;
 int ft;
 int chk;
-
+#define pi 3.1416;
+ld h;
+ld a, b, c;
 ld func(ld x)
 {
     if(ft==1){
@@ -35,6 +37,55 @@ ld derivative(ld x)
    else{
    return a * cos(x) - b * sin(x) + c * (1 / pow(cos(x), 2));
    }
+}
+
+ld fxGEn(ld x,ld y,int choice) {
+
+    if (choice == 1) {
+        
+         return a*x + b * y+c; 
+    } else if (choice==2){
+        
+         return (a*sin(x) + b*cos(x)+c);
+    }
+    else{
+      return (a*sin(x) + b*cos(y)+c);
+
+    }
+}
+void runge_kutta()
+{
+  ld k1,k2,k3,k4,x0,y0,xn;
+  int itr;
+  cout<<"Enter h,x0,y0,xn value : ";
+  cin>>h>>x0>>y0>>xn;
+  
+    int choice;
+    cout << "Choose an equation:\n1) dy/dx = ax + by+c\n2) dy/dx = a*sin(x) + b*cos(x)+c\n3)dy/dx=a*sin(x)+bcos(y)+c";
+    cin >> choice; 
+    cout << "Enter a: ";
+    cin >> a;
+    cout << "Enter b: ";
+    cin >> b;
+    cout << "Enter c: ";
+    cin >> c;
+    if(choice!=1)
+  itr=ceil((xn*3.1416)/h);
+  else itr=ceil((xn)/h);
+   cout<<itr<<endl;
+    cout<<x0<< " "<<y0<<endl;
+   for(int i=1;i<itr;i++)
+    {
+     k1=h*fxGEn(x0,y0,choice);
+     k2=h*fxGEn(x0+h/2,y0+k1/2,choice);
+     k3=h*fxGEn(x0+h/2,y0+k2/2,choice);
+     k4=h*fxGEn(x0+h,y0+k3,choice);
+     y0= y0+((1/6.0)*(k1+2*k2+2*k3+k4));
+     x0=x0+h;
+     cout<<x0<< " "<<y0<<endl;
+    }
+
+
 }
 void jacobian(int n) {
     vector<vector<ld>> A(n, vector<ld>(n));
