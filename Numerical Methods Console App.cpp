@@ -94,17 +94,14 @@ void lufactorization(int n) {
     vector<vector<double>> U(n, vector<double>(n, 0.0));
     vector<double> b(n, 0.0);
 
-    cout << "enter the elements of the matrix:"<<endl;
-    for (int i=0;i<n;i++)
-        {
+   cout<<"Enter coefficients \033[1;35ma1, a2, ..., an\033[0m and constant \033[1;35md\033[0m for equation \033[0m" <<" (format: \033[1;35ma1x1 + a2x2 + ... + anxn = d\033[0m): \033[0m\n";
+    for(int i=0;i<n;i++)
+    {
         for(int j=0;j<n;j++)
         {
             cin>>matrix[i][j];
         }
-    }
-    cout <<"enter the elements of the right-hand side vector:"<<endl;
-    for (int i=0;i<n;i++) {
-        cin >>b[i];
+        cin>>b[i];
     }
     for(int i=0;i<n;i++)
      {
@@ -152,14 +149,13 @@ void lufactorization(int n) {
         }
         x[i]=(y[i]-sum)/U[i][i];
     }
-    cout<<"Solution vector x is:"<<endl;
+    cout<<"\033[1;35mSolution vector x is:\033[0m"<<endl;
     for (int i=0;i<n;i++)
     {
-        cout<<x[i]<< " ";
+        cout<<"\033[1m"<<x[i]<< "  \033[0m";
     }
     cout<<endl;
 }
-
 
 
 void newton_raphsonAlgebric()
