@@ -88,6 +88,80 @@ void jacobian(int n) {
     cout<<"The total number of iterations required : "<<iteration_count<<endl;
 }
 
+void lufactorization(int n) {
+    vector<vector<double>> matrix(n, vector<double>(n, 0.0));
+    vector<vector<double>> L(n, vector<double>(n, 0.0));
+    vector<vector<double>> U(n, vector<double>(n, 0.0));
+    vector<double> b(n, 0.0);
+
+    cout << "enter the elements of the matrix:"<<endl;
+    for (int i=0;i<n;i++)
+        {
+        for(int j=0;j<n;j++)
+        {
+            cin>>matrix[i][j];
+        }
+    }
+    cout <<"enter the elements of the right-hand side vector:"<<endl;
+    for (int i=0;i<n;i++) {
+        cin >>b[i];
+    }
+    for(int i=0;i<n;i++)
+     {
+        for(int k=i;k<n;k++) {
+            double sum=0.0;
+            for (int j=0;j<i;j++)
+             {
+                sum+=L[i][j]*U[j][k];
+            }
+            U[i][k]=matrix[i][k]-sum;
+        }
+        for(int k=i;k<n;k++)
+        {
+            if(i==k)
+            {
+                L[i][i]=1;
+            } else
+            {
+                double sum=0.0;
+                for (int j=0;j<i;j++)
+                 {
+                    sum+=L[k][j]*U[j][i];
+                }
+                L[k][i]=(matrix[k][i]-sum)/U[i][i];
+            }
+        }
+    }
+    vector<double>y(n,0.0);
+    for (int i=0;i<n;i++)
+     {
+        double sum=0.0;
+        for (int j=0;j<i;j++)
+        {
+            sum+=L[i][j]*y[j];
+        }
+        y[i]=(b[i]-sum);
+    }
+    vector<double>x(n,0.0);
+    for (int i =n-1;i>=0;i--)
+     {
+        double sum=0.0;
+        for (int j=i+1;j<n;j++)
+        {
+            sum+=U[i][j]*x[j];
+        }
+        x[i]=(y[i]-sum)/U[i][i];
+    }
+    cout<<"Solution vector x is:"<<endl;
+    for (int i=0;i<n;i++)
+    {
+        cout<<x[i]<< " ";
+    }
+    cout<<endl;
+}
+
+
+
 void newton_raphsonAlgebric()
 {
     int dd=degree;
@@ -550,7 +624,7 @@ int main()
                 return 0;
               break;
             case 5:
-             //lu
+             lufactorization(n);
              cout<<again;
               cin>>chk;
               if(chk==1)
