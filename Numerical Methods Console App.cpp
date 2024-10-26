@@ -261,7 +261,7 @@ void gauss_seidel(int var)
     cout<<"Total iterations: "<<count;
 }
 void gaussElimination(int n) {
-    vector<vector<double>> matrix(n,vector<double>(n+1));
+    vector<vector<ld>> matrix(n,vector<ld>(n+1));
     cout<<"Enter the augmented matrix:"<<endl;
     for (int i=0;i<n;i++) {
         for (int j=0;j<=n;j++) {
@@ -295,7 +295,7 @@ void gaussElimination(int n) {
         {
             if (j!=i) 
             {
-                double factor=matrix[j][i];
+                ld factor=matrix[j][i];
                 for (int k = i; k <= n; k++) {
                     matrix[j][k] -= factor * matrix[i][k];
                 }
@@ -310,7 +310,7 @@ void gaussElimination(int n) {
 }
 
 void gaussJordanElimination(int n) {
-    vector<vector<double>>matrix(n,vector<double>(n+1));
+    vector<vector<ld>>matrix(n,vector<ld>(n+1));
     cout<<"Enter the augmented matrix:"<<endl;
     for(int i=0;i<n;i++) 
     {
@@ -334,7 +334,7 @@ void gaussJordanElimination(int n) {
             cout << "No unique solution exists."<<endl;
             return;
         }
-        double pivot=matrix[i][i];
+        ld pivot=matrix[i][i];
         for (int k=0;k<=n;k++) {
             matrix[i][k]/= pivot;
         }
@@ -342,7 +342,7 @@ void gaussJordanElimination(int n) {
         for (int j=0;j<n;j++)
         {
             if (j!=i) {
-                double factor=matrix[j][i];
+                ld factor=matrix[j][i];
                 for (int k=0; k<=n;k++) {
                     matrix[j][k]-=factor*matrix[i][k];
                 }
