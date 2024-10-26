@@ -4,7 +4,7 @@ This is the repository for a C++ console application to implement and solve vari
 
 # Features :
 
-*i) Root Finding Algorithms *
+i) Root Finding Algorithms 
 
 1) Bisection Method : Root finding by the method of interval bisection.
 2) False Position Method : A root finding scheme using linear interpolation.
